@@ -17,12 +17,13 @@
       "firstSeenAt": "2026-11-06T12:34:58.000Z",
       "eventId": "exchange-docs:c4db9a9b2c62eda259dac7654bbaca2832628335:added:Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md",
       "englishSummary": {
-        "category": "Doc update",
-        "headline": "Mirror Learn: 2 added",
-        "summary": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md.",
-        "adminImpact": "Review the underlying documentation change to determine whether it affects tenant configuration or rollout plans.",
-        "actionRequired": false,
-        "generatedBy": "fallback"
+        "category": "New feature",
+        "headline": "OAuth authentication is now documented for MRS migration endpoints",
+        "summary": "Microsoft 365 Mailbox Replication Service can use OAuth to authenticate migrations between Microsoft 365 and on-premises Exchange. The documentation covers Entra ID application registration and supports Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU, with Microsoft 365 commercial cloud.",
+        "adminImpact": "Administrators adopting this capability must have Entra ID access, configure the migration domain, and register the on-premises API application.",
+        "actionRequired": true,
+        "generatedBy": "openai",
+        "model": "gpt-5.6-luna"
       }
     },
     {
@@ -43,11 +44,12 @@
       "eventId": "exchange-docs:c4db9a9b2c62eda259dac7654bbaca2832628335:added:Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md",
       "englishSummary": {
         "category": "Doc update",
-        "headline": "Mirror Learn: 2 added",
-        "summary": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md.",
-        "adminImpact": "Review the underlying documentation change to determine whether it affects tenant configuration or rollout plans.",
+        "headline": "New guidance documents Exchange Online message size limits",
+        "summary": "A new article explains the 35 MB sending and 36 MB receiving defaults, customizable 1–150 MB mailbox limits, EAC and PowerShell configuration, and how message overhead affects the effective limit.",
+        "adminImpact": "Administrators can use the documented commands and settings to configure mailbox limits and account for headers, encoding, attachments, and content conversion when troubleshooting rejected messages. No action is required.",
         "actionRequired": false,
-        "generatedBy": "fallback"
+        "generatedBy": "openai",
+        "model": "gpt-5.6-luna"
       }
     }
   ],
@@ -65,9 +67,9 @@
     "overview": "Today's report includes 2 new, 0 updated, and 0 removed Exchange Online documentation files across 2 documentation areas.",
     "groups": [
       {
-        "category": "Doc update",
+        "category": "New feature",
         "title": "Exchange hybrid",
-        "summary": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md.",
+        "summary": "Microsoft 365 Mailbox Replication Service can use OAuth to authenticate migrations between Microsoft 365 and on-premises Exchange. The documentation covers Entra ID application registration and supports Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU, with Microsoft 365 commercial cloud.",
         "sourceFiles": [
           "Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md"
         ]
@@ -75,7 +77,7 @@
       {
         "category": "Doc update",
         "title": "Mail flow",
-        "summary": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md.",
+        "summary": "A new article explains the 35 MB sending and 36 MB receiving defaults, customizable 1–150 MB mailbox limits, EAC and PowerShell configuration, and how message overhead affects the effective limit.",
         "sourceFiles": [
           "Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md"
         ]
@@ -83,14 +85,14 @@
     ],
     "highlights": [
       {
-        "category": "Doc update",
+        "category": "New feature",
         "headline": "Exchange hybrid",
-        "detail": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md."
+        "detail": "Microsoft 365 Mailbox Replication Service can use OAuth to authenticate migrations between Microsoft 365 and on-premises Exchange. The documentation covers Entra ID application registration and supports Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU, with Microsoft 365 commercial cloud."
       },
       {
         "category": "Doc update",
         "headline": "Mail flow",
-        "detail": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md."
+        "detail": "A new article explains the 35 MB sending and 36 MB receiving defaults, customizable 1–150 MB mailbox limits, EAC and PowerShell configuration, and how message overhead affects the effective limit."
       }
     ],
     "generatedBy": "fallback"

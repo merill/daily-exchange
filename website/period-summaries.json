@@ -1,90 +1,166 @@
 {
-  "version": 3,
-  "generatedAt": "2026-11-07T02:24:24.170Z",
-  "generator": {
-    "model": "deterministic-backfill",
-    "reasoningEffort": "none"
-  },
   "days": {
     "2026-11-06": {
-      "headline": "Create migration endpoints with OAuth authentication leads 2 Exchange updates",
-      "overview": "6 November 2026 recorded 2 new Exchange Online documentation changes. The most active areas were Hybrid, Mail flow.",
-      "adminImpact": "Review the linked Microsoft Learn changes that apply to your managed platforms, policies, applications, and rollout plans. The archive preserves the source diff for verification.",
+      "headline": "OAuth migration endpoints and mailbox limits lead this Exchange update",
+      "overview": "The period delivered two substantive administrator guides: one covering OAuth authentication for Microsoft 365 Mailbox Replication Service migrations and another documenting Exchange Online message-size limits. Message Center notices also cover a policy-controlled unified inbox in new Outlook, Outlook event duplication, and custom profile-card properties planned for January 2027.",
+      "adminImpact": "Admins adopting OAuth-based migrations need Entra ID access, a configured migration domain, and an on-premises API application registration; the documented server scope is Exchange Server Subscription Edition or Exchange 2019 CU15 with the latest ESU, paired with Microsoft 365 commercial cloud. Mail-flow administrators can use the documented EAC and PowerShell settings while accounting for message overhead. New Outlook administrators should review policy controls for the All Accounts view. The event-duplication notice requires no action, while custom profile properties will require setup if adopted from January 2027.",
       "keyChanges": [
         {
-          "title": "Create migration endpoints with OAuth authentication",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md.",
+          "title": "OAuth authentication is documented for MRS migration endpoints",
+          "detail": "A new Hybrid guide explains how Microsoft 365 Mailbox Replication Service can use OAuth for migrations between Microsoft 365 and on-premises Exchange. It covers Entra ID application registration and supports Exchange Server Subscription Edition or Exchange 2019 CU15 with the latest ESU, together with Microsoft 365 commercial cloud. Adoption requires Entra ID access, migration-domain configuration, and registration of the on-premises API application.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-06-create-migration-endpoints-with-oauth-authentication-01"
         },
         {
-          "title": "Message size limits in exchange online",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md.",
+          "title": "Exchange Online message-size guidance sets concrete defaults and limits",
+          "detail": "The new mail-flow article documents 35 MB sending and 36 MB receiving defaults, configurable mailbox limits from 1 MB to 150 MB, and EAC and PowerShell configuration. It also explains how headers, encoding, attachments, and content conversion contribute to message overhead and the effective limit.",
           "product": "Mail flow",
           "sourceId": "doc-2026-11-06-message-size-limits-in-exchange-online-02"
+        },
+        {
+          "title": "New Outlook adds a policy-controlled All Accounts inbox",
+          "detail": "The All Accounts, or Unified Inbox, view in new Outlook for Windows lets users manage email from multiple accounts in one view without merging the underlying mailboxes. Administrators can enable or disable the feature through a policy in the Microsoft 365 Apps admin center and control whether users can override the setting.",
+          "product": "Exchange Online",
+          "sourceId": "MC1519843"
+        },
+        {
+          "title": "Outlook is rolling out event duplication",
+          "detail": "The new Duplicate event capability lets users create an event from an existing one without re-entering its details. Microsoft says rollout began in late September 2026 and is scheduled to finish by early December 2026; the notice calls for no administrator action or compliance changes.",
+          "product": "Exchange Online",
+          "sourceId": "MC1492166"
+        },
+        {
+          "title": "Profile cards will support up to 10 third-party custom properties",
+          "detail": "Starting in January 2027, administrators will be able to add up to 10 properties from external systems to Microsoft 365 profile cards through Microsoft Graph People connectors. The feature is off by default and requires administrator setup; later updates are planned for SAP SuccessFactors and Workday support.",
+          "product": "Exchange Online",
+          "sourceId": "MC1193692"
         }
       ],
-      "generatedBy": "deterministic-backfill",
-      "generatedAt": "2026-11-07T02:24:24.170Z"
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-07T09:01:16.197Z",
+      "usage": {
+        "inputTokens": 1376,
+        "outputTokens": 2239,
+        "costUsd": 0.002962
+      }
     }
   },
   "weeks": {
     "2026-11-02": {
-      "headline": "Create migration endpoints with OAuth authentication leads 2 Exchange updates",
-      "overview": "Week of 2 November 2026 recorded 2 new Exchange Online documentation changes. The most active areas were Hybrid, Mail flow.",
-      "adminImpact": "Review the linked Microsoft Learn changes that apply to your managed platforms, policies, applications, and rollout plans. The archive preserves the source diff for verification.",
+      "headline": "Exchange Admin API permission and response changes put app integrations on notice",
+      "overview": "The week’s most consequential Exchange updates affect automation rather than mailbox features. Microsoft is replacing two Exchange Online Admin API v2.0 permissions by November 2026 and changing the MailboxFolderPermission response shape in early November. New guidance also documents OAuth-authenticated hybrid migrations, while a separate article records current message-size defaults and configuration limits.",
+      "adminImpact": "Administrators responsible for Exchange integrations should inventory applications using the affected Admin API permissions, transition them to the new permissions, obtain consent, verify RBAC roles, test, and remove the legacy permissions. They should also update consumers of MailboxFolderPermission to process the User object’s new fields. Hybrid teams evaluating OAuth migrations should confirm the documented Exchange and Entra ID prerequisites; mailbox-size changes are configuration-dependent rather than required by this update.",
       "keyChanges": [
         {
-          "title": "Create migration endpoints with OAuth authentication",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md.",
+          "title": "Admin API permissions are being replaced",
+          "detail": "Exchange Online Admin API v2.0 will replace Exchange.ManageV2 and Exchange.ManageAsAppV2 with new permissions by November 2026. Affected applications need an updated permission grant, admin consent, RBAC verification, testing, and removal of the old permissions; Microsoft says endpoint changes are not involved.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540345"
+        },
+        {
+          "title": "MailboxFolderPermission will return a structured User object",
+          "detail": "By early November 2026, the Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as an object containing DisplayName, Name, and PrimarySmtpAddress. Applications that expect the current response shape may need code changes to avoid errors.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540342"
+        },
+        {
+          "title": "OAuth migration endpoint guidance covers supported hybrid versions",
+          "detail": "New guidance explains how Microsoft 365 Mailbox Replication Service can authenticate migrations with OAuth between Microsoft 365 and on-premises Exchange. The documented path requires Entra ID access, migration-domain configuration, and registration of an on-premises API application, and supports Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU in the Microsoft 365 commercial cloud.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-06-create-migration-endpoints-with-oauth-authentication-01"
         },
         {
-          "title": "Message size limits in exchange online",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md.",
+          "title": "Message-size guidance sets 35 MB and 36 MB defaults",
+          "detail": "The new Exchange Online article documents 35 MB sending and 36 MB receiving defaults, mailbox limits configurable from 1 to 150 MB, and EAC and PowerShell procedures. It also explains that headers, encoding, attachments, and content conversion contribute to message overhead and can reduce the effective limit.",
           "product": "Mail flow",
           "sourceId": "doc-2026-11-06-message-size-limits-in-exchange-online-02"
         }
       ],
-      "generatedBy": "deterministic-backfill",
-      "generatedAt": "2026-11-07T02:24:24.170Z"
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-07T09:01:16.197Z",
+      "usage": {
+        "inputTokens": 1724,
+        "outputTokens": 1100,
+        "costUsd": 0.001665
+      }
     }
   },
   "months": {
     "2026-11": {
-      "headline": "Create migration endpoints with OAuth authentication leads 2 Exchange updates",
-      "overview": "November 2026 recorded 2 new Exchange Online documentation changes. The most active areas were Hybrid, Mail flow.",
-      "adminImpact": "Review the linked Microsoft Learn changes that apply to your managed platforms, policies, applications, and rollout plans. The archive preserves the source diff for verification.",
+      "headline": "Exchange Online Admin API permission replacements and response-shape changes demand app updates",
+      "overview": "November puts Exchange Online API consumers on two compatibility tracks. Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new Exchange Online Admin API v2.0 permissions by November 2026, with no endpoint changes, and will change MailboxFolderPermission.User into a structured object containing DisplayName, Name, and PrimarySmtpAddress by early November 2026. New guidance also documents OAuth-authenticated hybrid migration endpoints, while a separate article records message-size defaults and limits. Outlook adds an administratively controllable All Accounts view.",
+      "adminImpact": "Inventory applications using the two legacy Admin API permissions, transition them to the replacement permissions, obtain admin consent, verify RBAC roles, test, and remove the old permissions. Update MailboxFolderPermission consumers for the new User object shape. For OAuth migrations, confirm the documented Exchange and Entra ID prerequisites before configuring endpoints. The All Accounts view can be controlled through the Microsoft 365 Apps admin center, including user override settings.",
       "keyChanges": [
         {
-          "title": "Create migration endpoints with OAuth authentication",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md.",
+          "title": "Exchange Online Admin API permissions are being replaced",
+          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new Exchange Online Admin API v2.0 permissions by November 2026. Affected applications must transition, obtain admin consent, verify RBAC roles, test access, and remove the old permissions; the endpoints themselves are unchanged.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540345"
+        },
+        {
+          "title": "MailboxFolderPermission changes the User property to an object",
+          "detail": "By early November 2026, the Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as a structured object with DisplayName, Name, and PrimarySmtpAddress. Applications that expect the previous response shape need to handle the new fields to avoid errors.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540342"
+        },
+        {
+          "title": "OAuth hybrid migration endpoint guidance adds explicit platform prerequisites",
+          "detail": "New guidance documents OAuth authentication for Mailbox Replication Service migrations between Microsoft 365 and on-premises Exchange. It covers Entra ID application registration and requires Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU, an appropriate migration domain, an on-premises API application, and the Microsoft 365 commercial cloud.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-06-create-migration-endpoints-with-oauth-authentication-01"
         },
         {
-          "title": "Message size limits in exchange online",
-          "detail": "Added Exchange Online documentation in Exchange/ExchangeOnline/mail-flow-best-practices/message-size-limits-exchange-online.md.",
+          "title": "Message-size guidance specifies defaults, configurable limits, and overhead",
+          "detail": "The new reference article specifies 35 MB sending and 36 MB receiving defaults, configurable mailbox limits from 1 MB to 150 MB, and EAC and PowerShell configuration paths. It also explains that headers, encoding, attachments, and content conversion reduce the effective limit.",
           "product": "Mail flow",
           "sourceId": "doc-2026-11-06-message-size-limits-in-exchange-online-02"
+        },
+        {
+          "title": "New Outlook adds a policy-controlled All Accounts inbox view",
+          "detail": "The new Outlook for Windows can show email from multiple accounts in an All Accounts, or Unified Inbox, view without merging mailboxes. Administrators can enable or disable the feature and control user override options through a policy in the Microsoft 365 Apps admin center.",
+          "product": "Exchange Online",
+          "sourceId": "MC1519843"
         }
       ],
-      "generatedBy": "deterministic-backfill",
-      "generatedAt": "2026-11-07T02:24:24.170Z"
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-07T09:01:16.197Z",
+      "usage": {
+        "inputTokens": 1909,
+        "outputTokens": 2250,
+        "costUsd": 0.003082
+      }
     }
   },
-  "usageByDay": {},
+  "version": 3,
+  "generatedAt": "2026-11-07T09:01:16.197Z",
+  "generator": {
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "xhigh"
+  },
+  "usageByDay": {
+    "2026-11-07": {
+      "inputTokens": 5009,
+      "outputTokens": 5589,
+      "requests": 3,
+      "costUsd": 0.007709
+    }
+  },
   "lastRun": {
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "requests": 0,
-    "costUsd": 0
+    "inputTokens": 5009,
+    "outputTokens": 5589,
+    "requests": 3,
+    "costUsd": 0.007709
   },
   "totalUsage": {
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "requests": 0,
-    "costUsd": 0
+    "inputTokens": 5009,
+    "outputTokens": 5589,
+    "requests": 3,
+    "costUsd": 0.007709
   }
 }
