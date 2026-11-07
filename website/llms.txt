@@ -1,0 +1,13 @@
+# Daily Exchange News
+
+A readable record of what changed across Exchange Online documentation.
+
+- [Latest day](https://daily.exchange.admin.news/)
+- [Current week](https://daily.exchange.admin.news/week/)
+- [Products](https://daily.exchange.admin.news/products/)
+- [Topics](https://daily.exchange.admin.news/topics/)
+- [Message Center](https://daily.exchange.admin.news/message-center/)
+- [Search the archive](https://daily.exchange.admin.news/search/)
+- [Compare a Learn page](https://mx.merill.net/)
+- [About](https://daily.exchange.admin.news/about/)
+- [RSS](https://daily.exchange.admin.news/rss.xml)
