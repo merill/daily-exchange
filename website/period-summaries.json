@@ -45,6 +45,28 @@
         "outputTokens": 2239,
         "costUsd": 0.002962
       }
+    },
+    "2026-11-09": {
+      "headline": "EWS deprecation puts cross-tenant Free/Busy, MailTips, and calendar sharing at risk",
+      "overview": "Microsoft’s announced EWS deprecation began October 1, 2026, affecting cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy is slated to replace EWS by late November 2026; GCC rollout is paused.",
+      "adminImpact": "Organizations using EWS for these cross-tenant capabilities must migrate using Microsoft’s provided guidance to avoid disruption. GCC administrators should account for the paused rollout and timing.",
+      "keyChanges": [
+        {
+          "title": "Cross-tenant EWS workloads must move to Cross-Tenant Access Policy",
+          "detail": "EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft says Microsoft 365 Cross-Tenant Access Policy will replace EWS by late November 2026 and directs affected organizations to migrate; GCC rollout is paused.",
+          "product": "Exchange Online",
+          "sourceId": "MC1446796"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-09T23:29:45.908Z",
+      "usage": {
+        "inputTokens": 876,
+        "outputTokens": 977,
+        "costUsd": 0.001348
+      }
     }
   },
   "weeks": {
@@ -87,58 +109,80 @@
         "outputTokens": 1100,
         "costUsd": 0.001665
       }
-    }
-  },
-  "months": {
-    "2026-11": {
-      "headline": "Exchange Online Admin API permission replacements and response-shape changes demand app updates",
-      "overview": "November puts Exchange Online API consumers on two compatibility tracks. Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new Exchange Online Admin API v2.0 permissions by November 2026, with no endpoint changes, and will change MailboxFolderPermission.User into a structured object containing DisplayName, Name, and PrimarySmtpAddress by early November 2026. New guidance also documents OAuth-authenticated hybrid migration endpoints, while a separate article records message-size defaults and limits. Outlook adds an administratively controllable All Accounts view.",
-      "adminImpact": "Inventory applications using the two legacy Admin API permissions, transition them to the replacement permissions, obtain admin consent, verify RBAC roles, test, and remove the old permissions. Update MailboxFolderPermission consumers for the new User object shape. For OAuth migrations, confirm the documented Exchange and Entra ID prerequisites before configuring endpoints. The All Accounts view can be controlled through the Microsoft 365 Apps admin center, including user override settings.",
+    },
+    "2026-11-09": {
+      "headline": "EWS deprecation requires cross-tenant Free/Busy, MailTips, and Calendar Sharing migration",
+      "overview": "Microsoft says Exchange Web Services (EWS) deprecation began October 1, 2026, affecting cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy will replace EWS by late November 2026, and organizations must migrate to avoid disruption. The GCC rollout is paused.",
+      "adminImpact": "Exchange Online administrators should migrate the affected cross-tenant scenarios to Microsoft 365 Cross-Tenant Access Policy and consult Microsoft’s migration guidance and updates. GCC administrators should account for the paused rollout.",
       "keyChanges": [
         {
-          "title": "Exchange Online Admin API permissions are being replaced",
-          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new Exchange Online Admin API v2.0 permissions by November 2026. Affected applications must transition, obtain admin consent, verify RBAC roles, test access, and remove the old permissions; the endpoints themselves are unchanged.",
+          "title": "Cross-tenant EWS scenarios require migration",
+          "detail": "EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing from October 1, 2026. Microsoft 365 Cross-Tenant Access Policy is scheduled to replace EWS by late November 2026; Microsoft says organizations must migrate to avoid disruption. The GCC rollout is paused.",
           "product": "Exchange Online",
-          "sourceId": "MC1540345"
-        },
-        {
-          "title": "MailboxFolderPermission changes the User property to an object",
-          "detail": "By early November 2026, the Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as a structured object with DisplayName, Name, and PrimarySmtpAddress. Applications that expect the previous response shape need to handle the new fields to avoid errors.",
-          "product": "Exchange Online",
-          "sourceId": "MC1540342"
-        },
-        {
-          "title": "OAuth hybrid migration endpoint guidance adds explicit platform prerequisites",
-          "detail": "New guidance documents OAuth authentication for Mailbox Replication Service migrations between Microsoft 365 and on-premises Exchange. It covers Entra ID application registration and requires Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU, an appropriate migration domain, an on-premises API application, and the Microsoft 365 commercial cloud.",
-          "product": "Hybrid",
-          "sourceId": "doc-2026-11-06-create-migration-endpoints-with-oauth-authentication-01"
-        },
-        {
-          "title": "Message-size guidance specifies defaults, configurable limits, and overhead",
-          "detail": "The new reference article specifies 35 MB sending and 36 MB receiving defaults, configurable mailbox limits from 1 MB to 150 MB, and EAC and PowerShell configuration paths. It also explains that headers, encoding, attachments, and content conversion reduce the effective limit.",
-          "product": "Mail flow",
-          "sourceId": "doc-2026-11-06-message-size-limits-in-exchange-online-02"
-        },
-        {
-          "title": "New Outlook adds a policy-controlled All Accounts inbox view",
-          "detail": "The new Outlook for Windows can show email from multiple accounts in an All Accounts, or Unified Inbox, view without merging mailboxes. Administrators can enable or disable the feature and control user override options through a policy in the Microsoft 365 Apps admin center.",
-          "product": "Exchange Online",
-          "sourceId": "MC1519843"
+          "sourceId": "MC1446796"
         }
       ],
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-07T09:01:16.197Z",
+      "generatedAt": "2026-11-09T23:29:45.908Z",
       "usage": {
-        "inputTokens": 1909,
-        "outputTokens": 2250,
-        "costUsd": 0.003082
+        "inputTokens": 851,
+        "outputTokens": 755,
+        "costUsd": 0.001076
+      }
+    }
+  },
+  "months": {
+    "2026-11": {
+      "headline": "EWS cross-tenant migration and Admin API changes demand November action",
+      "overview": "November brings two material Exchange integration changes: cross-tenant Free/Busy, MailTips, and Calendar Sharing must move off EWS as Microsoft 365 Cross-Tenant Access Policy replaces it by late November, while Admin API permissions and a mailbox-folder response shape require application updates. New guidance also documents OAuth-based hybrid migration endpoints and specifies current message-size defaults and configuration limits.",
+      "adminImpact": "Prioritize migration of affected cross-tenant EWS scenarios, noting that the GCC rollout is paused. For Admin API integrations, obtain consent for replacement permissions, verify RBAC roles, test, remove legacy permissions, and update consumers for the new MailboxFolderPermission fields. Hybrid teams should verify Entra ID, migration-domain, Exchange version and ESU, and commercial-cloud prerequisites before adopting OAuth migration endpoints. The message-size article is reference guidance for configuration and troubleshooting; it requires no universal change.",
+      "keyChanges": [
+        {
+          "title": "Cross-tenant collaboration scenarios are moving off EWS",
+          "detail": "EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing from October 1, 2026. Microsoft 365 Cross-Tenant Access Policy is scheduled to replace EWS by late November 2026, and Microsoft says organizations must migrate to avoid disruption. The GCC rollout is paused.",
+          "product": "Exchange Online",
+          "sourceId": "MC1446796"
+        },
+        {
+          "title": "Exchange Online Admin API v2.0 retires two legacy permissions",
+          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new permissions by November 2026. Endpoints are unchanged, but affected applications need admin consent, RBAC verification, testing, and removal of the old permissions to maintain access.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540345"
+        },
+        {
+          "title": "MailboxFolderPermission returns a structured User property",
+          "detail": "By early November 2026, the Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as a structured object containing DisplayName, Name, and PrimarySmtpAddress. Applications consuming the response must handle the new fields to avoid errors.",
+          "product": "Exchange Online",
+          "sourceId": "MC1540342"
+        },
+        {
+          "title": "OAuth migration endpoint guidance defines hybrid prerequisites",
+          "detail": "New guidance documents OAuth authentication for Mailbox Replication Service migrations between Microsoft 365 and on-premises Exchange. It covers Entra ID application registration and supports Exchange Server Subscription Edition or Exchange 2019 CU 15 with the latest ESU in the Microsoft 365 commercial cloud.",
+          "product": "Hybrid",
+          "sourceId": "doc-2026-11-06-create-migration-endpoints-with-oauth-authentication-01"
+        },
+        {
+          "title": "Message-size guidance sets defaults and a configurable range",
+          "detail": "The new article specifies 35 MB sending and 36 MB receiving defaults, with mailbox limits configurable from 1 to 150 MB through the Exchange admin center or PowerShell. Headers, encoding, attachments, and content conversion can reduce the effective limit.",
+          "product": "Mail flow",
+          "sourceId": "doc-2026-11-06-message-size-limits-in-exchange-online-02"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-09T23:29:45.908Z",
+      "usage": {
+        "inputTokens": 2192,
+        "outputTokens": 3122,
+        "costUsd": 0.004185
       }
     }
   },
   "version": 3,
-  "generatedAt": "2026-11-07T09:01:16.197Z",
+  "generatedAt": "2026-11-09T23:29:45.908Z",
   "generator": {
     "model": "gpt-5.6-luna",
     "reasoningEffort": "xhigh"
@@ -149,18 +193,24 @@
       "outputTokens": 5589,
       "requests": 3,
       "costUsd": 0.007709
+    },
+    "2026-11-09": {
+      "inputTokens": 3919,
+      "outputTokens": 4854,
+      "requests": 3,
+      "costUsd": 0.006609
     }
   },
   "lastRun": {
-    "inputTokens": 5009,
-    "outputTokens": 5589,
+    "inputTokens": 3919,
+    "outputTokens": 4854,
     "requests": 3,
-    "costUsd": 0.007709
+    "costUsd": 0.006609
   },
   "totalUsage": {
-    "inputTokens": 5009,
-    "outputTokens": 5589,
-    "requests": 3,
-    "costUsd": 0.007709
+    "inputTokens": 8928,
+    "outputTokens": 10443,
+    "requests": 6,
+    "costUsd": 0.014318
   }
 }
