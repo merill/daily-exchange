@@ -1,0 +1,102 @@
+{
+  "newFiles": [],
+  "modifiedFiles": [
+    {
+      "filename": "Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md",
+      "status": "modified",
+      "additions": 44,
+      "deletions": 26,
+      "changes": 70,
+      "patch": "diff --git a/Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md b/Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md\nindex 7cfbbba..0dc6793 100644\n--- a/Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md\n+++ b/Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md\n@@ -12,7 +12,7 @@ uhfHeaderId: MSDocsHeader-Exchange\n feedback_system: None\n feedback_product_url: ''\n description: The OAuth token exchange described here will allow the Microsoft 365 Mailbox Replication Service to authenticate with the organization’s on-premises Exchange environment using Oauth. This is a secure replacement for the use of basic auth (username and password) credentials of a user who is a member of privileged role groups in the on-premises Active Directory.\n-ms.date: 2026-11-04T00:00:00.0000000Z\n+ms.date: 2026-11-10T00:00:00.0000000Z\n ms.service: exchange-server-it-pro\n ms.topic: how-to\n author: soropeza1\n@@ -60,8 +60,8 @@ Important\n \r\n The new OAuth method is available to:\r\n \r\n-- On-premises organizations running the latest Exchange Server Subscription Edition (SE) or Exchange 2019 CU 15 with the latest ESU.\r\n-- O365 commercial cloud organizations.\r\n+- Microsoft 365 multi-tenant (WW) environments only.\r\n+- On-premises organizations running the October 2026 or newer version of Exchange Server Subscription Edition (SE) or Exchange Server 2019 CU15 with the latest Exchange Security Update (October 2026).\r\n \r\n ## Prerequisites\r\n \r\n@@ -80,7 +80,7 @@ The new OAuth method is available to:\n \r\n     Note\r\n \r\n-    Using the **Application (client) ID** in the domain name portion of the URI is **optional but recommended**. The URI must be specific to the MRS proxy endpoint on-premises and using the ID ensures this. However, you can use any fully qualified name that's specific to the MRS proxy endpoint and part of a domain name that you registered for use in your Microsoft Entra ID tenant.\r\n+    Using the **Application (client) ID** in the domain name portion of the URI is **optional but recommended**. The URI must be specific to the MRS proxy endpoint on-premises and using the ID ensures this. However, you can use any fully qualified name that's specific to the MRS proxy endpoint and part of a domain name that you registered for use in your Microsoft Entra ID tenant. When using the **Application (client) ID** you will need to create the corresponding DNS record for it and add it to the publicly trusted certificate as needed.\r\n 3. Add an app role to your application. Select **API permissions** on the left-hand column. Select the three dots to the right of Microsoft Graph and choose **Remove all permissions** to leave direct permissions empty.\r\n \r\n     [![Screenshot that shows Registered App, remove default API permissions.](../exchangehybrid/hybrid-deployment/media/oauth-migration-endpoint/pasted-image-8f8c7cc9.png)](../exchangehybrid/hybrid-deployment/media/oauth-migration-endpoint/pasted-image-8f8c7cc9.png#lightbox)\r\n@@ -118,7 +118,7 @@ The new OAuth method is available to:\n }\r\n ```\r\n \r\n-Add the `xml_aud_guid` property to `optionalClaims` shown below and then select **Save**.\r\n+Add the `xms_aud_guid` property to `optionalClaims` shown below and then select **Save**.\r\n \r\n ```json\r\n {\r\n@@ -205,7 +205,7 @@ You need to register the service principal for the Mailbox Replication Service (\n     $appId = \"Application (client) ID\"\r\n     $role = \"App role Value\"\r\n     \r\n-    # on premise API Appplication\r\n+    # on premise API Application\r\n     $app = Get-MgApplication –Filter \"AppId eq '$appId'\"\r\n     $appRole = $app.AppRoles | ?{$_.Value -eq $role}\r\n     \r\n@@ -363,41 +363,59 @@ This is only required if you are using Exchange Server Subscription Edition (SE)\n \r\n Now that the configuration is completed, you can create an Oauth endpoint that can be used in migration batches or in remote moves.\r\n \r\n-### Create the migration endpoint\r\n+1. Connect to Exchange Online PowerShell. Start PowerShell as administrator and [Connect to Exchange Online PowerShell](/en-us/powershell/exchange/connect-to-exchange-online-powershell).\r\n \r\n-Specify the `-UseOauth` parameter when you create the migration endpoint. The `-RemoteServer` parameter must match the host part of the **Application ID URI** in the on-premises API.\r\n+    ```powershell\r\n+    Connect-ExchangeOnline\r\n+    ```\r\n+2. Create the migration endpoint. Specify the `-UseOauth` parameter when you create the migration endpoint. The `-RemoteServer` parameter must match the host part of the **Application ID URI** in the on-premises API. For more optional configuration parameters, see [New-MigrationEndpoint](/en-us/powershell/module/exchangepowershell/new-migrationendpoint).\r\n \r\n-If you used `https://[Application (client) ID].contoso.com/ews/mrsproxy.svc` in the **Application ID URI** then `RemoteServer` value is `[Application (client) ID].contoso.com`. If you used a different URI, for example `https://mail.contoso.com/ews/mrsproxy.svc` then the value to use is `mail.contoso.com`\r\n+    Note\r\n \r\n-1. Connect to Exchange Online PowerShell: Start PowerShell as administrator and [Connect to Exchange Online PowerShell](/en-us/powershell/exchange/connect-to-exchange-online-powershell) by running the following command.\r\n+    If you used `https://[Application (client) ID].contoso.com/ews/mrsproxy.svc` in the **Application ID URI** configuration then `RemoteServer` value is `[Application (client) ID].contoso.com`.\r\n \r\n-```powershell\r\n-Connect-ExchangeOnline\r\n-```\r\n+    If you used a different URI, for example `https://mail.contoso.com/ews/mrsproxy.svc` then the value to use is `mail.contoso.com`.\r\n \r\n-1. Create the migration endpoint. For more optional configuration parameters, see [New-MigrationEndpoint](/en-us/powershell/module/exchangepowershell/new-migrationendpoint).\r\n+    ```powershell\r\n+    $remoteServer = \"Application ID URI host value\"\r\n+    New-MigrationEndpoint -UseOAuth -Name \"OAuthEndpoint\" -RemoteServer $remoteServer -ExchangeRemoteMove\r\n+    ```\r\n+3. After you create the migration endpoint, run `Test-MigrationServerAvailability`, which gets an OAuth token.\r\n \r\n-```powershell\r\n-$remoteServer = \"mail.contoso.com\"\r\n-New-MigrationEndpoint -UseOAuth -Name \"OAuthEndpoint\" -RemoteServer $remoteServer -ExchangeRemoteMove\r\n-```\r\n+    ```powershell\r\n+    Test-MigrationServerAvailability -Endpoint \"OAuthEndpoint\"\r\n+    \r\n+    Result           : Success\r\n+    Message          : This test only validates retrieving the OAuth token based on the endpoint configuration. It does not attempt to connect to the remote host.\r\n+    SupportsCutover  : False\r\n+    ErrorDetail      :\r\n+    StructuredResult :\r\n+    TestedEndpoint   : OAuthEndpoint\r\n+    IsValid          : True\r\n+    Identity         :\r\n+    ObjectState      : New\r\n+    \r\n+    ```\r\n \r\n-1. After you create the migration endpoint, run `Test-MigrationServerAvailability`, which gets an OAuth token.\r\n+### Create move requests or migration batches\r\n+\r\n+Use the newly created migration endpoint to configure remote moves by using the `New-MoveRequest` cmdlet. The `-RemoteHostName` value must match the host path of the on-premises application URI as explained in the previous section. Also, specify `-ArchiveDomain` to ensure the cmdlet resolves the correct parameter set:\r\n \r\n ```powershell\r\n-Test-MigrationServerAvailability -Endpoint \"OAuthEndpoint\"\r\n+$remoteServer = \"Application ID URI host value\"\r\n+New-MoveRequest -Identity \"user@contoso.com\" -SourceEndpoint \"OAuthEndpoint\" -RemoteHostName $remoteServer -Remote -TargetDeliveryDomain \"contoso.com\" -ArchiveDomain \"contoso.com\"\r\n ```\r\n \r\n-### Create move requests or migration batches\r\n-\r\n-Use the new migration endpoint to configure remote moves by using the `New-MoveRequest` cmdlet. The `-RemoteHostName` value must match the host path of the on-premises application URI as explained in the previous section. Also, specify `-ArchiveDomain` to ensure the cmdlet resolves the correct parameter set. For more parameters, see [New-MoveRequest](/en-us/powershell/module/exchangepowershell/new-moverequest).\r\n+Here is an example for an offboarding move:\r\n \r\n ```powershell\r\n-$remoteServer = \"mail.contoso.com\"\r\n-New-MoveRequest -Identity \"user@contoso.com\" -TargetDeliveryDomain [contoso.com] -SourceEndpoint \"OAuthEndpoint\" -RemoteHostName $remoteServer -Remote -ArchiveDomain [contoso.com]\r\n+$remoteServer = \"Application ID URI host value\"\r\n+New-MoveRequest -Identity \"user@contoso.com\" -SourceEndpoint \"OAuthEndpoint\" -Outbound -RemoteHostName $remoteServer -TargetDeliveryDomain \"contoso.com\" -RemoteTargetDatabase \"your target database\"\r\n ```\r\n \r\n-For migration batch creation, treat the OAuth endpoint the same as any other endpoint type. For more parameters for offboarding, see [New-MigrationBatch (ExchangePowerShell) | Microsoft Learn.](/en-us/powershell/module/exchangepowershell/new-migrationbatch). For more parameters for onboarding, see [New-MigrationBatch (ExchangePowerShell) | Microsoft Learn](/en-us/powershell/module/exchangepowershell/new-migrationbatch).\r\n+For more parameters, see [New-MoveRequest](/en-us/powershell/module/exchangepowershell/new-moverequest).\r\n+\r\n+For migration batch creation, treat the OAuth endpoint the same as any other endpoint type. For more parameters for onboarding, see [New-MigrationBatch](/en-us/powershell/module/exchangepowershell/new-migrationbatch).\r\n \r\n ```powershell\r\n New-Migrationbatch -Name MyBatch -SourceEndpoint \"OAuthEndpoint\" \r\n",
+      "baseCommitSha": "a417291669665e92e2dc6eb27f98b0c02ead9b07",
+      "commitSha": "73fdbed14a63bae61d050c45f95ba0d6c742adb7",
+      "commitMessage": "Mirror Learn: 1 changed",
+      "commitAuthor": "github-actions[bot]",
+      "commitDate": "2026-11-11 02:20:58 +0000",
+      "githubUrl": "https://github.com/merill/exchange-docs-mirror/blob/main/Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md",
+      "publicDocsUrl": "https://learn.microsoft.com/en-us/exchange/hybrid-deployment/oauth-migration-endpoint",
+      "eventId": "exchange-docs:73fdbed14a63bae61d050c45f95ba0d6c742adb7:modified:Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md",
+      "firstSeenAt": "2026-11-11T09:40:06.609Z",
+      "englishSummary": {
+        "category": "Feature update",
+        "headline": "OAuth migration endpoint prerequisites and setup instructions changed",
+        "summary": "The guidance now limits supported environments to Microsoft 365 multi-tenant (WW) and on-premises Exchange Server SE from October 2026 onward or Exchange 2019 CU15 with the October 2026 security update. It also changes the optional claim to `xms_aud_guid` and adds endpoint testing and move-request examples.",
+        "adminImpact": "Administrators configuring this integration must use the updated platform prerequisites and optional claim, then validate the endpoint and ensure URI host values match the migration commands.",
+        "actionRequired": true,
+        "generatedBy": "openai",
+        "model": "gpt-5.6-luna"
+      }
+    }
+  ],
+  "deletedFiles": [],
+  "messageCenterItems": [
+    {
+      "id": "MC1488841",
+      "source": "mc",
+      "sourceLabel": "Message Center",
+      "date": "2026-11-10",
+      "title": "Microsoft Outlook: Update to default blocked file types in OwaMailboxPolicy",
+      "summary": "Microsoft is updating Outlook on the web and new Outlook for Windows to block .msix and .msixbundle file types by default in OwaMailboxPolicy starting December 2026 to enhance security. Organizations using these file types should allow them in policies before rollout; no action needed otherwise.",
+      "product": {
+        "slug": "exchange-online",
+        "name": "Exchange Online",
+        "short": "Exchange Online",
+        "learn": "https://learn.microsoft.com/en-us/exchange/exchange-online",
+        "icon": "exchange-online.svg"
+      },
+      "topic": {
+        "slug": "general",
+        "name": "General",
+        "icon": "/assets/topics/general.svg"
+      },
+      "changeType": "Major update",
+      "url": "/message-center/MC1488841/",
+      "originalUrl": "https://mc.merill.net/message/MC1488841",
+      "body": "<p>Updated November 10, 2026: We have updated the timeline. Thank you for your patience.&nbsp;</p><p><b><b>What and why</b></b></p><p>To enhance security in Outlook on the web and new Outlook for Windows, we are updating the default list of blocked file types in OwaMailboxPolicy. As part of this update, the <code>.msix</code> and <code>.msixbundle</code> file types will be added to the BlockedFileTypes list in the default OWA Mailbox policy and any custom policies created in your tenant. Most organizations are not expected to be affected by this update because these file types are infrequently used. This update is part of our ongoing efforts to strengthen security and help protect organizations from potentially unsafe file attachments.</p><p><b><b>Rollout schedule</b></b></p><ul><li><b>General Availability (Worldwide, GCC, GCC High, DoD):</b> Rollout begins in early December 2026 (previously early November) and is expected to complete by mid-December 2026 (previously mid-November).</li></ul><p><b><b>Impact on your organization</b></b></p><p><i>Who is affected</i></p><ul><li>Exchange Online administrators who manage OWA mailbox policies</li><li>Users who send or receive <code>.msix</code> or <code>.msixbundle</code> attachments in Outlook on the web or new Outlook for Windows</li></ul><p><i>Platforms and services</i></p><ul><li>Outlook for the web</li><li>New Outlook for Windows</li><li>Exchange Online</li></ul><p><i>What will happen</i></p><ul><li>The <code>.msix</code> and <code>.msixbundle</code> file types will be added to the BlockedFileTypes list in all OWA Mailbox policies in your organization, including the default policy and any custom policies created in your tenant.</li><li>Users who send or receive <code>.msix</code> or <code>.msixbundle</code> attachments in Outlook on the web or new Outlook for Windows will no longer be able to open or download them.</li></ul><p><b><b>Action required and recommendations</b></b></p><p>No action is required if your organization does not rely on the <code>.msix</code> or <code>.msixbundle</code> file types. If your organization relies on these file types, we recommend that you add them to the AllowedFileTypes property of your users' OwaMailboxPolicy objects prior to rollout.</p><p><b><b>Learn more</b></b></p><ul><li><a href=\"https://support.microsoft.com/outlook/blocked-attachments-in-outlook\" rel=\"noopener noreferrer\">Blocked attachments in Outlook | Microsoft Support</a></li><li><a href=\"https://learn.microsoft.com/powershell/module/exchangepowershell/set-owamailboxpolicy#-allowedfiletypes\" rel=\"noopener noreferrer\">Set-OwaMailboxPolicy -AllowedFileTypes | Microsoft Learn</a></li><li><a href=\"https://learn.microsoft.com/powershell/module/exchangepowershell/set-owamailboxpolicy#-blockedfiletypes\" rel=\"noopener noreferrer\">Set-OwaMailboxPolicy -BlockedFileTypes | Microsoft Learn</a></li></ul><p><b><b>Compliance considerations</b></b></p><p>No compliance considerations identified. Review as appropriate for your organization.</p>",
+      "category": "planForChange",
+      "services": [
+        "Exchange Online"
+      ],
+      "tags": [
+        "Updated message",
+        "Feature update",
+        "User impact",
+        "Admin impact"
+      ],
+      "startDate": "2026-10-05T22:40:18Z",
+      "endDate": "2027-01-25T08:00:00Z",
+      "lastModifiedDateTime": "2026-11-10T22:16:46.377Z",
+      "version": "2026-11-10T22:16:46.377Z",
+      "eventId": "message-center:MC1488841:2026-11-10T22:16:46.377Z",
+      "firstSeenAt": "2026-11-11T09:40:20.952Z"
+    }
+  ],
+  "summary": {
+    "totalCommits": 1,
+    "totalFiles": 1,
+    "authors": [
+      "github-actions[bot]"
+    ]
+  },
+  "englishSummary": {
+    "overview": "Today's report includes 0 new, 1 updated, and 0 removed Exchange Online documentation files across 1 documentation area.",
+    "groups": [
+      {
+        "category": "Feature update",
+        "title": "Exchange hybrid",
+        "summary": "The guidance now limits supported environments to Microsoft 365 multi-tenant (WW) and on-premises Exchange Server SE from October 2026 onward or Exchange 2019 CU15 with the October 2026 security update. It also changes the optional claim to `xms_aud_guid` and adds endpoint testing and move-request examples.",
+        "sourceFiles": [
+          "Exchange/ExchangeHybrid/hybrid-deployment/oauth-migration-endpoint.md"
+        ]
+      }
+    ],
+    "highlights": [
+      {
+        "category": "Feature update",
+        "headline": "Exchange hybrid",
+        "detail": "The guidance now limits supported environments to Microsoft 365 multi-tenant (WW) and on-premises Exchange Server SE from October 2026 onward or Exchange 2019 CU15 with the October 2026 security update. It also changes the optional claim to `xms_aud_guid` and adds endpoint testing and move-request examples."
+      }
+    ],
+    "generatedBy": "fallback"
+  }
+}
