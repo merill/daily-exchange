@@ -123,6 +123,28 @@
         "outputTokens": 424,
         "costUsd": 0.000692
       }
+    },
+    "2026-11-16": {
+      "headline": "Outlook adds Insert-tab symbols to new Windows and web through January",
+      "overview": "Microsoft is rolling out symbol insertion from the Insert tab in new Outlook for Windows and Outlook on the web. The rollout began in mid-October 2026 and is scheduled to complete by late January 2027.",
+      "adminImpact": "No administrator action is required. The capability will arrive for users on new Outlook for Windows and the web as the rollout progresses.",
+      "keyChanges": [
+        {
+          "title": "Insert Symbols becomes available in new Outlook",
+          "detail": "Users can insert symbols and other special characters into emails through the Insert tab. Microsoft expects the rollout to complete by late January 2027.",
+          "product": "Exchange Online",
+          "sourceId": "MC1479513"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-17T10:54:55.921Z",
+      "usage": {
+        "inputTokens": 928,
+        "outputTokens": 624,
+        "costUsd": 0.000934
+      }
     }
   },
   "weeks": {
@@ -211,41 +233,63 @@
         "outputTokens": 1713,
         "costUsd": 0.002333
       }
+    },
+    "2026-11-16": {
+      "headline": "Outlook brings symbol insertion to the Insert tab in new Outlook",
+      "overview": "Outlook is rolling out the ability to insert symbols into emails from the Insert tab. The rollout began in mid-October 2026 and is scheduled to complete by late January 2027 for new Outlook for Windows and Outlook on the web.",
+      "adminImpact": "No administrator action is required. The change affects users on new Outlook for Windows and the web and supports inserting special characters during message composition.",
+      "keyChanges": [
+        {
+          "title": "Insert Symbols rolls out in new Outlook",
+          "detail": "Users will be able to select and insert symbols into emails through the Insert tab. Microsoft expects the rollout to complete by late January 2027.",
+          "product": "Exchange Online",
+          "sourceId": "MC1479513"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-17T10:54:55.921Z",
+      "usage": {
+        "inputTokens": 821,
+        "outputTokens": 498,
+        "costUsd": 0.000762
+      }
     }
   },
   "months": {
     "2026-11": {
-      "headline": "EWS replacement and Admin API changes lead November’s Exchange admin agenda",
-      "overview": "November’s consequential Exchange changes are operational rather than cosmetic. Cross-tenant Free/Busy, MailTips, and Calendar Sharing are moving away from EWS to Microsoft 365 Cross-Tenant Access Policy; Exchange Online Admin API permissions and a response contract are changing; and Outlook on the web and new Outlook for Windows will block additional file types by default. Updated hybrid guidance also narrows the supported OAuth migration environments and changes the required claim.",
-      "adminImpact": "Prioritize migration for affected cross-tenant EWS scenarios and inventory applications using the legacy Exchange Online Admin API permissions or the MailboxFolderPermission response. If users need .msix or .msixbundle attachments, allow those extensions in OwaMailboxPolicy before the December 2026 rollout. Hybrid administrators should align deployments with the updated Exchange prerequisites and xms_aud_guid claim, then test the migration endpoint and move-request commands.",
+      "headline": "EWS migration and Admin API permission changes headline November Exchange updates",
+      "overview": "November’s consequential Exchange changes were operational: Microsoft set a late-November replacement path for EWS-based cross-tenant Free/Busy, MailTips, and Calendar Sharing, required Admin API permission migrations, and scheduled a new default block for .msix and .msixbundle in OwaMailboxPolicy. An Admin API response-shape change and tighter hybrid OAuth endpoint guidance add compatibility and configuration work.",
+      "adminImpact": "Prioritize migration for affected cross-tenant EWS scenarios and inventory applications using the retiring Admin API permissions or the changing MailboxFolderPermission response. Allow .msix and .msixbundle in OwaMailboxPolicy only where those file types remain necessary. Hybrid administrators configuring OAuth migration endpoints should apply the updated platform prerequisites and claim, test the endpoint, and verify URI host values against move-request commands.",
       "keyChanges": [
         {
-          "title": "Cross-tenant EWS scenarios move to Cross-Tenant Access Policy",
-          "detail": "Microsoft says EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing from October 1, 2026. Microsoft 365 Cross-Tenant Access Policy is scheduled to replace EWS for these scenarios by late November 2026; GCC rollout is paused. Organizations using the affected workflows must migrate to avoid disruption.",
+          "title": "Cross-tenant EWS scenarios must move to Cross-Tenant Access Policy",
+          "detail": "EWS deprecation starts October 1, 2026, affecting cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft says Microsoft 365 Cross-Tenant Access Policy will replace EWS by late November 2026; the GCC rollout is paused.",
           "product": "Exchange Online",
           "sourceId": "MC1446796"
         },
         {
-          "title": "Outlook adds .msix and .msixbundle to default blocked file types",
-          "detail": "Beginning in December 2026, Outlook on the web and new Outlook for Windows will block .msix and .msixbundle by default through OwaMailboxPolicy. Organizations that need to receive or send these file types should allow them in the relevant policies before rollout.",
-          "product": "Exchange Online",
-          "sourceId": "MC1488841"
-        },
-        {
-          "title": "Exchange Online Admin API permissions are being replaced",
-          "detail": "Exchange Online Admin API v2.0 is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new permissions by November 2026. Affected applications need the replacement permissions, administrator consent, verified RBAC roles, testing, and removal of the legacy permissions to maintain access; endpoint changes are not expected.",
+          "title": "Exchange Online Admin API v2.0 retires two legacy permissions",
+          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 by November 2026. Affected applications must transition to the new permissions, obtain admin consent, verify RBAC roles, test access, and remove the old permissions.",
           "product": "Exchange Online",
           "sourceId": "MC1540345"
         },
         {
-          "title": "MailboxFolderPermission changes User from a value to an object",
-          "detail": "The Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as a structured object containing DisplayName, Name, and PrimarySmtpAddress by early November 2026. Applications consuming the endpoint must handle the new response shape to avoid errors.",
+          "title": "Outlook adds default blocking for MSIX attachments",
+          "detail": "Starting December 2026, Outlook on the web and new Outlook for Windows will block .msix and .msixbundle file types by default in OwaMailboxPolicy. Organizations that use these file types should allow them in policy before rollout.",
+          "product": "Exchange Online",
+          "sourceId": "MC1488841"
+        },
+        {
+          "title": "MailboxFolderPermission changes the Admin API User response shape",
+          "detail": "An early-November 2026 Exchange Online Admin API v2.0 update changes the MailboxFolderPermission endpoint’s User property to a structured object containing DisplayName, Name, and PrimarySmtpAddress. Application consumers must handle the new structure to avoid errors.",
           "product": "Exchange Online",
           "sourceId": "MC1540342"
         },
         {
-          "title": "OAuth migration endpoint guidance narrows hybrid prerequisites",
-          "detail": "Updated OAuth Migration Endpoint guidance supports Microsoft 365 multi-tenant (WW) with on-premises Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. It changes the optional claim to xms_aud_guid and adds endpoint-testing and move-request examples; URI host values must match the migration commands.",
+          "title": "Hybrid OAuth migration guidance narrows supported environments",
+          "detail": "The updated guidance specifies Microsoft 365 multi-tenant (WW) with on-premises Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. It changes the optional claim to xms_aud_guid and adds endpoint-testing and move-request examples.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-11-oauth-migration-endpoint-01"
         }
@@ -253,16 +297,16 @@
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-13T09:48:28.121Z",
+      "generatedAt": "2026-11-17T10:54:55.921Z",
       "usage": {
-        "inputTokens": 2811,
-        "outputTokens": 2756,
-        "costUsd": 0.003869
+        "inputTokens": 3027,
+        "outputTokens": 3918,
+        "costUsd": 0.005307
       }
     }
   },
   "version": 3,
-  "generatedAt": "2026-11-13T09:48:28.121Z",
+  "generatedAt": "2026-11-17T10:54:55.921Z",
   "generator": {
     "model": "gpt-5.6-luna",
     "reasoningEffort": "xhigh"
@@ -297,18 +341,24 @@
       "outputTokens": 4893,
       "requests": 3,
       "costUsd": 0.006894
+    },
+    "2026-11-17": {
+      "inputTokens": 4776,
+      "outputTokens": 5040,
+      "requests": 3,
+      "costUsd": 0.007003
     }
   },
   "lastRun": {
-    "inputTokens": 5114,
-    "outputTokens": 4893,
+    "inputTokens": 4776,
+    "outputTokens": 5040,
     "requests": 3,
-    "costUsd": 0.006894
+    "costUsd": 0.007003
   },
   "totalUsage": {
-    "inputTokens": 23232,
-    "outputTokens": 25813,
-    "requests": 15,
-    "costUsd": 0.035622
+    "inputTokens": 28008,
+    "outputTokens": 30853,
+    "requests": 18,
+    "costUsd": 0.042625
   }
 }
