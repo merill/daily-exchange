@@ -145,6 +145,34 @@
         "outputTokens": 624,
         "costUsd": 0.000934
       }
+    },
+    "2026-11-20": {
+      "headline": "Outlook Contact Support rollout joins Exchange moderation’s Actionable Messages transition",
+      "overview": "Two Exchange Online Message Center notices affect Outlook support access and moderation approvals. Contact Support is rolling out to Outlook for iOS, Android, and Mac, while moderation approvals are transitioning to Actionable Messages adaptive cards across Outlook clients.",
+      "adminImpact": "Review the existing “Allow access to Contact Support in the new Outlook” policy before the late-November rollout; no new policy is required, but administrators that disabled the policy must redeploy it. For moderation approvals, verify that Actionable Messages is enabled and that moderators have Microsoft 365 mailboxes.",
+      "keyChanges": [
+        {
+          "title": "Contact Support uses the existing Outlook policy across mobile and Mac",
+          "detail": "A new Contact Support experience is rolling out in Outlook for iOS, Android, and Mac, aligning with the new Outlook for Windows. The rollout starts in late November 2026 and is scheduled to complete by January 2027. It uses the existing “Allow access to Contact Support in the new Outlook” policy; no new policy is introduced, but administrators with the policy disabled must redeploy it.",
+          "product": "Exchange Online",
+          "sourceId": "MC1562272"
+        },
+        {
+          "title": "Moderation approvals move to Actionable Messages adaptive cards",
+          "detail": "Exchange Online moderation approvals are moving to Actionable Messages adaptive cards across all Outlook clients, with rollout scheduled to complete by November 2026. Dual-mode approvals ended July 31, 2026. Moderators must have Microsoft 365 mailboxes, and Actionable Messages must be enabled to prepare for the update.",
+          "product": "Exchange Online",
+          "sourceId": "MC1230457"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-21T09:59:42.690Z",
+      "usage": {
+        "inputTokens": 1096,
+        "outputTokens": 1378,
+        "costUsd": 0.001873
+      }
     }
   },
   "weeks": {
@@ -235,61 +263,73 @@
       }
     },
     "2026-11-16": {
-      "headline": "Outlook brings symbol insertion to the Insert tab in new Outlook",
-      "overview": "Outlook is rolling out the ability to insert symbols into emails from the Insert tab. The rollout began in mid-October 2026 and is scheduled to complete by late January 2027 for new Outlook for Windows and Outlook on the web.",
-      "adminImpact": "No administrator action is required. The change affects users on new Outlook for Windows and the web and supports inserting special characters during message composition.",
+      "headline": "Outlook Contact Support reaches mobile and Mac clients under existing policy",
+      "overview": "Microsoft is rolling out a new Contact Support experience in Outlook for iOS, Android, and Mac from late November 2026 through January 2027, using the existing new Outlook policy. Exchange Online moderation approvals are also moving to Actionable Messages across Outlook clients, while new Outlook for Windows and web gain an Insert Symbols command. The period is primarily a set of scheduled client rollouts rather than a new Exchange Online service capability.",
+      "adminImpact": "No new policy is required for Contact Support, but administrators who disabled the existing policy must redeploy it. For moderation approvals, ensure Actionable Messages is enabled and that moderators have Microsoft 365 mailboxes. Insert Symbols requires no administrator action.",
       "keyChanges": [
         {
-          "title": "Insert Symbols rolls out in new Outlook",
-          "detail": "Users will be able to select and insert symbols into emails through the Insert tab. Microsoft expects the rollout to complete by late January 2027.",
-          "product": "Exchange Online",
+          "title": "Contact Support expands to Outlook for iOS, Android, and Mac",
+          "detail": "The new Contact Support experience aligns these clients with new Outlook for Windows. Rollout begins in late November 2026 and is scheduled to complete by January 2027, using the existing “Allow access to Contact Support in the new Outlook” policy.",
+          "product": "Outlook for iOS, Android, and Mac",
+          "sourceId": "MC1562272"
+        },
+        {
+          "title": "Moderation approvals adopt Actionable Messages across Outlook clients",
+          "detail": "Exchange Online moderation approvals use Actionable Messages adaptive cards across all Outlook clients, with the rollout scheduled to complete by November 2026. Dual-mode approvals end July 31, 2026; moderators must have Microsoft 365 mailboxes and Actionable Messages must be enabled.",
+          "product": "Exchange Online moderation approvals",
+          "sourceId": "MC1230457"
+        },
+        {
+          "title": "Insert Symbols rolls out in new Outlook for Windows and web",
+          "detail": "Users gain the ability to insert symbols into messages from the Insert tab. The rollout began in mid-October 2026 and is scheduled to finish by late January 2027; Microsoft says no administrator action is required.",
+          "product": "New Outlook for Windows and Outlook on the web",
           "sourceId": "MC1479513"
         }
       ],
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-17T10:54:55.921Z",
+      "generatedAt": "2026-11-21T09:59:42.690Z",
       "usage": {
-        "inputTokens": 821,
-        "outputTokens": 498,
-        "costUsd": 0.000762
+        "inputTokens": 1074,
+        "outputTokens": 941,
+        "costUsd": 0.001344
       }
     }
   },
   "months": {
     "2026-11": {
-      "headline": "EWS migration and Admin API permission changes headline November Exchange updates",
-      "overview": "November’s consequential Exchange changes were operational: Microsoft set a late-November replacement path for EWS-based cross-tenant Free/Busy, MailTips, and Calendar Sharing, required Admin API permission migrations, and scheduled a new default block for .msix and .msixbundle in OwaMailboxPolicy. An Admin API response-shape change and tighter hybrid OAuth endpoint guidance add compatibility and configuration work.",
-      "adminImpact": "Prioritize migration for affected cross-tenant EWS scenarios and inventory applications using the retiring Admin API permissions or the changing MailboxFolderPermission response. Allow .msix and .msixbundle in OwaMailboxPolicy only where those file types remain necessary. Hybrid administrators configuring OAuth migration endpoints should apply the updated platform prerequisites and claim, test the endpoint, and verify URI host values against move-request commands.",
+      "headline": "EWS replacement and Admin API permission changes put Exchange integrations on notice",
+      "overview": "November’s biggest Exchange changes target cross-tenant scheduling and automation rather than end-user mail flow. EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing; Microsoft says Microsoft 365 Cross-Tenant Access Policy will replace EWS by late November 2026, while GCC rollout is paused. In parallel, Exchange Online Admin API v2.0 permissions and the MailboxFolderPermission response shape are changing, and Outlook on the web and new Outlook for Windows will block .msix and .msixbundle files by default from December. Hybrid OAuth migration guidance also updates its documented platform and claim requirements.",
+      "adminImpact": "Prioritize migration of affected cross-tenant EWS scenarios and account for the separate GCC rollout pause. Inventory applications using Exchange.ManageV2 or Exchange.ManageAsAppV2, transition them to the replacement permissions, obtain consent, verify RBAC roles, test, and remove the legacy permissions. Update MailboxFolderPermission consumers to process the structured User object. Review OwaMailboxPolicy if users must continue receiving .msix or .msixbundle attachments. Hybrid teams using OAuth migration endpoints should align with the documented platform prerequisites and xms_aud_guid claim, then test the endpoint.",
       "keyChanges": [
         {
-          "title": "Cross-tenant EWS scenarios must move to Cross-Tenant Access Policy",
-          "detail": "EWS deprecation starts October 1, 2026, affecting cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft says Microsoft 365 Cross-Tenant Access Policy will replace EWS by late November 2026; the GCC rollout is paused.",
+          "title": "Cross-tenant EWS scenarios move to Cross-Tenant Access Policy",
+          "detail": "EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing from October 1, 2026. Microsoft 365 Cross-Tenant Access Policy is scheduled to replace EWS by late November 2026; the GCC rollout is paused.",
           "product": "Exchange Online",
           "sourceId": "MC1446796"
         },
         {
-          "title": "Exchange Online Admin API v2.0 retires two legacy permissions",
-          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 by November 2026. Affected applications must transition to the new permissions, obtain admin consent, verify RBAC roles, test access, and remove the old permissions.",
+          "title": "Exchange Online Admin API v2.0 replaces legacy permissions",
+          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 during November 2026. Applications must move to the new permissions and complete consent, RBAC verification, and testing; endpoint changes are not planned.",
           "product": "Exchange Online",
           "sourceId": "MC1540345"
         },
         {
-          "title": "Outlook adds default blocking for MSIX attachments",
-          "detail": "Starting December 2026, Outlook on the web and new Outlook for Windows will block .msix and .msixbundle file types by default in OwaMailboxPolicy. Organizations that use these file types should allow them in policy before rollout.",
-          "product": "Exchange Online",
-          "sourceId": "MC1488841"
-        },
-        {
-          "title": "MailboxFolderPermission changes the Admin API User response shape",
-          "detail": "An early-November 2026 Exchange Online Admin API v2.0 update changes the MailboxFolderPermission endpoint’s User property to a structured object containing DisplayName, Name, and PrimarySmtpAddress. Application consumers must handle the new structure to avoid errors.",
+          "title": "MailboxFolderPermission returns a structured User object",
+          "detail": "The Exchange Online Admin API v2.0 MailboxFolderPermission endpoint is changing its User property to an object containing DisplayName, Name, and PrimarySmtpAddress by early November 2026. Application consumers must handle the new response shape.",
           "product": "Exchange Online",
           "sourceId": "MC1540342"
         },
         {
-          "title": "Hybrid OAuth migration guidance narrows supported environments",
-          "detail": "The updated guidance specifies Microsoft 365 multi-tenant (WW) with on-premises Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. It changes the optional claim to xms_aud_guid and adds endpoint-testing and move-request examples.",
+          "title": "Outlook adds .msix and .msixbundle to default blocked file types",
+          "detail": "Starting in December 2026, Outlook on the web and new Outlook for Windows will block .msix and .msixbundle by default through OwaMailboxPolicy. Organizations that use these file types should allow them in policy before rollout.",
+          "product": "Exchange Online",
+          "sourceId": "MC1488841"
+        },
+        {
+          "title": "OAuth migration endpoint guidance updates platform and claim requirements",
+          "detail": "The hybrid guidance documents support for Microsoft 365 multi-tenant (WW) with Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. It changes the optional claim to xms_aud_guid and adds endpoint-testing and move-request examples.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-11-oauth-migration-endpoint-01"
         }
@@ -297,16 +337,16 @@
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-17T10:54:55.921Z",
+      "generatedAt": "2026-11-21T09:59:42.690Z",
       "usage": {
-        "inputTokens": 3027,
-        "outputTokens": 3918,
-        "costUsd": 0.005307
+        "inputTokens": 3338,
+        "outputTokens": 2575,
+        "costUsd": 0.003758
       }
     }
   },
   "version": 3,
-  "generatedAt": "2026-11-17T10:54:55.921Z",
+  "generatedAt": "2026-11-21T09:59:42.690Z",
   "generator": {
     "model": "gpt-5.6-luna",
     "reasoningEffort": "xhigh"
@@ -347,18 +387,24 @@
       "outputTokens": 5040,
       "requests": 3,
       "costUsd": 0.007003
+    },
+    "2026-11-21": {
+      "inputTokens": 5508,
+      "outputTokens": 4894,
+      "requests": 3,
+      "costUsd": 0.006974
     }
   },
   "lastRun": {
-    "inputTokens": 4776,
-    "outputTokens": 5040,
+    "inputTokens": 5508,
+    "outputTokens": 4894,
     "requests": 3,
-    "costUsd": 0.007003
+    "costUsd": 0.006974
   },
   "totalUsage": {
-    "inputTokens": 28008,
-    "outputTokens": 30853,
-    "requests": 18,
-    "costUsd": 0.042625
+    "inputTokens": 33516,
+    "outputTokens": 35747,
+    "requests": 21,
+    "costUsd": 0.049599
   }
 }
