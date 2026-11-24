@@ -201,6 +201,28 @@
         "outputTokens": 865,
         "costUsd": 0.001265
       }
+    },
+    "2026-11-24": {
+      "headline": "Refreshed Copilot Chat navigation reaches Outlook for iOS and Android from December",
+      "overview": "Microsoft is updating Copilot Chat in Outlook for iOS and Android with a refreshed, more consistent Microsoft 365 design. The rollout is scheduled to begin in mid-December 2026 and finish by late January 2027, bringing improvements to the chat interface, prompts, and navigation.",
+      "adminImpact": "No administrator action or compliance changes are required. Administrators should expect a phased end-user interface update in Outlook mobile during the rollout window.",
+      "keyChanges": [
+        {
+          "title": "Copilot Chat UX refresh for Outlook mobile",
+          "detail": "Outlook for iOS and Android will receive the updated Copilot Chat design, including a revised chat interface, prompts, and navigation aligned with other Microsoft 365 apps. Rollout starts in mid-December 2026 and completes by late January 2027.",
+          "product": "Exchange Online",
+          "sourceId": "MC1551148"
+        }
+      ],
+      "generatedBy": "openai",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "xhigh",
+      "generatedAt": "2026-11-24T23:34:16.653Z",
+      "usage": {
+        "inputTokens": 1026,
+        "outputTokens": 485,
+        "costUsd": 0.000787
+      }
     }
   },
   "weeks": {
@@ -325,19 +347,25 @@
       }
     },
     "2026-11-23": {
-      "headline": "Exchange Online administrators must migrate EWS-dependent collaboration scenarios before deprecation",
-      "overview": "Exchange Web Services (EWS) deprecation started on 1 October 2026 and affects cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy will replace EWS during the September–December 2026 transition. Separately, Outlook for iOS and Android is rolling out enriched contact profiles and duplicate-contact management through March 2027.",
-      "adminImpact": "Administrators should migrate affected cross-tenant scenarios to Microsoft 365 Cross-Tenant Access Policy to avoid service disruption; hybrid and on-premises deployments have separate guidance. No administrator action is required for the Outlook mobile contacts update, although users should update to the latest app version after rollout.",
+      "headline": "EWS deprecation puts cross-tenant Free/Busy, MailTips, and Calendar Sharing migrations on deadline",
+      "overview": "The week’s main administrator issue is Exchange Web Services (EWS) deprecation. Microsoft says cross-tenant Free/Busy, MailTips, and Calendar Sharing are affected, with Cross-Tenant Access Policy replacing EWS during September–December 2026. Two lower-impact Outlook mobile updates cover Copilot Chat’s interface and contact management.",
+      "adminImpact": "Organizations should migrate the affected cross-tenant capabilities to avoid service disruption. Hybrid and on-premises scenarios have separate guidance. The two Outlook mobile changes require no administrator action or compliance changes; users should update to the latest app version for the contact improvements.",
       "keyChanges": [
         {
-          "title": "EWS deprecation affects three cross-tenant collaboration scenarios",
-          "detail": "EWS deprecation began on 1 October 2026 for cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy is the replacement, with the transition scheduled for September–December 2026. Hybrid and on-premises scenarios have separate guidance.",
+          "title": "Migrate cross-tenant calendar and messaging capabilities from EWS",
+          "detail": "EWS deprecation starts October 1, 2026, affecting cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy will replace EWS during the September–December 2026 period. Organizations must migrate to avoid service disruption, with separate guidance for hybrid and on-premises scenarios.",
           "product": "Exchange Online",
           "sourceId": "MC1446796"
         },
         {
-          "title": "Outlook mobile adds contact enrichment and duplicate management",
-          "detail": "Outlook for iOS and Android will unify duplicate contacts and enrich profiles with organizational information. The rollout runs from mid-July 2025 through March 2027; no administrator action is required, but users should update to the latest app version after rollout.",
+          "title": "Copilot Chat receives a refreshed Outlook mobile interface",
+          "detail": "Copilot Chat in Outlook for iOS and Android is getting a consistent Microsoft 365 design, along with an improved chat interface, prompts, and navigation. Rollout starts in mid-December 2026 and completes by late January 2027; Microsoft says no administrator action or compliance changes are required.",
+          "product": "Exchange Online",
+          "sourceId": "MC1551148"
+        },
+        {
+          "title": "Outlook mobile will merge duplicate contacts and enrich profiles",
+          "detail": "Outlook for iOS and Android will unify duplicate contacts and add organizational information to contact profiles, improving contact views. The rollout began in mid-July 2025 and is scheduled to complete by March 2027. Users should update to the latest app version after rollout.",
           "product": "Exchange Online",
           "sourceId": "MC1093912"
         }
@@ -345,47 +373,47 @@
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-24T01:46:02.496Z",
+      "generatedAt": "2026-11-24T23:34:16.653Z",
       "usage": {
-        "inputTokens": 979,
-        "outputTokens": 860,
-        "costUsd": 0.001228
+        "inputTokens": 1104,
+        "outputTokens": 1468,
+        "costUsd": 0.001982
       }
     }
   },
   "months": {
     "2026-11": {
-      "headline": "EWS deprecation and Admin API permission changes drive November priorities",
-      "overview": "November’s most consequential Exchange changes affect cross-tenant collaboration, automation, and attachment security. EWS-dependent Free/Busy, MailTips, and Calendar Sharing must move to Microsoft 365 Cross-Tenant Access Policy during the September–December 2026 transition. Exchange Online Admin API permissions and response data are also changing, while hybrid administrators received narrower OAuth migration endpoint guidance.",
-      "adminImpact": "Inventory applications and cross-tenant scenarios that depend on EWS or the affected Admin API contracts. Migrate and test integrations where required, review OwaMailboxPolicy if users need MSIX attachments, and align hybrid OAuth configurations with the documented platform and claim requirements.",
+      "headline": "EWS migration window and Admin API changes dominate Exchange priorities",
+      "overview": "November’s most consequential Exchange changes target cross-tenant services and application integrations. EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing, while Exchange Online Admin API v2.0 requires permission migration and a response-shape update. Outlook will also block .msix and .msixbundle files by default from December, and hybrid OAuth migration guidance now specifies narrower platform prerequisites and testing steps.",
+      "adminImpact": "Prioritize migration of the affected cross-tenant EWS workloads to Microsoft 365 Cross-Tenant Access Policy to avoid service disruption. Inventory applications using the retiring Admin API permissions, obtain consent for replacements, verify RBAC roles, test, and remove the old permissions; update MailboxFolderPermission consumers to process the new structured User object. Before the December Outlook rollout, allow .msix and .msixbundle in OwaMailboxPolicy if users still require them. Hybrid administrators using OAuth migration endpoints should follow the updated platform and claim requirements, test the endpoint, and match URI hosts in move-request commands.",
       "keyChanges": [
         {
-          "title": "EWS deprecation puts cross-tenant calendar scenarios on a migration clock",
-          "detail": "The October 1, 2026 EWS deprecation affects cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy will replace EWS during the September–December 2026 transition. Organizations must migrate to avoid service disruption; hybrid and on-premises scenarios have separate guidance.",
+          "title": "Cross-tenant EWS workloads move to Cross-Tenant Access Policy",
+          "detail": "EWS deprecation starts October 1, 2026 and affects cross-tenant Free/Busy, MailTips, and Calendar Sharing. Microsoft 365 Cross-Tenant Access Policy will replace EWS during September–December 2026. Organizations must migrate to avoid service disruption; hybrid and on-premises scenarios have separate guidance.",
           "product": "Exchange Online",
           "sourceId": "MC1446796"
         },
         {
-          "title": "Legacy Exchange Online Admin API permissions are being replaced",
-          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new permissions by November 2026. Affected applications must transition, obtain admin consent, verify RBAC roles, test access, and remove the old permissions. Endpoints are not changing.",
+          "title": "Exchange Online Admin API v2.0 permissions are being replaced",
+          "detail": "Microsoft is replacing Exchange.ManageV2 and Exchange.ManageAsAppV2 with new permissions by November 2026. Affected applications must transition, obtain administrator consent, verify RBAC roles, test access, and remove the old permissions. No endpoint changes are involved.",
           "product": "Exchange Online",
           "sourceId": "MC1540345"
         },
         {
-          "title": "MailboxFolderPermission now returns User as a structured object",
-          "detail": "The Exchange Online Admin API v2.0 MailboxFolderPermission response changes the User property to an object containing DisplayName, Name, and PrimarySmtpAddress. Applications must handle the new shape to avoid errors.",
+          "title": "MailboxFolderPermission returns a structured User object",
+          "detail": "The Exchange Online Admin API v2.0 MailboxFolderPermission endpoint will return User as an object containing DisplayName, Name, and PrimarySmtpAddress by early November 2026. Applications must handle the new response shape to avoid errors.",
           "product": "Exchange Online",
           "sourceId": "MC1540342"
         },
         {
-          "title": "Outlook will block MSIX attachments by default in OwaMailboxPolicy",
-          "detail": "Starting in December 2026, Outlook on the web and new Outlook for Windows will block .msix and .msixbundle file types by default. Organizations that use these attachments should allow them in OwaMailboxPolicy before rollout; no action is needed otherwise.",
+          "title": "Outlook blocks .msix and .msixbundle by default",
+          "detail": "Outlook on the web and new Outlook for Windows will update OwaMailboxPolicy to block .msix and .msixbundle file types by default starting in December 2026. Organizations that use these attachments should allow them in policy before rollout.",
           "product": "Exchange Online",
           "sourceId": "MC1488841"
         },
         {
-          "title": "OAuth migration endpoint guidance narrows supported hybrid environments",
-          "detail": "The updated guidance supports Microsoft 365 multi-tenant (WW) with on-premises Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. It changes the optional claim to xms_aud_guid and adds endpoint-testing and move-request examples.",
+          "title": "Hybrid OAuth migration guidance tightens platform prerequisites",
+          "detail": "Updated guidance limits the OAuth migration endpoint to Microsoft 365 multi-tenant (WW) with on-premises Exchange Server Subscription Edition from October 2026 onward, or Exchange 2019 CU15 with the October 2026 security update. The optional claim changes to xms_aud_guid, and the guidance adds endpoint-testing and move-request examples.",
           "product": "Hybrid",
           "sourceId": "doc-2026-11-11-oauth-migration-endpoint-01"
         }
@@ -393,16 +421,16 @@
       "generatedBy": "openai",
       "model": "gpt-5.6-luna",
       "reasoningEffort": "xhigh",
-      "generatedAt": "2026-11-24T01:46:02.496Z",
+      "generatedAt": "2026-11-24T23:34:16.653Z",
       "usage": {
-        "inputTokens": 3634,
-        "outputTokens": 2154,
-        "costUsd": 0.003312
+        "inputTokens": 3623,
+        "outputTokens": 2757,
+        "costUsd": 0.004033
       }
     }
   },
   "version": 3,
-  "generatedAt": "2026-11-24T01:46:02.496Z",
+  "generatedAt": "2026-11-24T23:34:16.653Z",
   "generator": {
     "model": "gpt-5.6-luna",
     "reasoningEffort": "xhigh"
@@ -451,22 +479,22 @@
       "costUsd": 0.006974
     },
     "2026-11-24": {
-      "inputTokens": 5749,
-      "outputTokens": 3879,
-      "requests": 3,
-      "costUsd": 0.005805
+      "inputTokens": 11502,
+      "outputTokens": 8589,
+      "requests": 6,
+      "costUsd": 0.012608
     }
   },
   "lastRun": {
-    "inputTokens": 5749,
-    "outputTokens": 3879,
+    "inputTokens": 5753,
+    "outputTokens": 4710,
     "requests": 3,
-    "costUsd": 0.005805
+    "costUsd": 0.006803
   },
   "totalUsage": {
-    "inputTokens": 39265,
-    "outputTokens": 39626,
-    "requests": 24,
-    "costUsd": 0.055404
+    "inputTokens": 45018,
+    "outputTokens": 44336,
+    "requests": 27,
+    "costUsd": 0.062207
   }
 }
