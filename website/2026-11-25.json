@@ -1,0 +1,88 @@
+{
+  "newFiles": [],
+  "modifiedFiles": [
+    {
+      "filename": "Exchange/ExchangeOnline/reference/admin-api-authentication.md",
+      "status": "modified",
+      "additions": 14,
+      "deletions": 10,
+      "changes": 24,
+      "patch": "diff --git a/Exchange/ExchangeOnline/reference/admin-api-authentication.md b/Exchange/ExchangeOnline/reference/admin-api-authentication.md\nindex 2c10fdf..dabcbd4 100644\n--- a/Exchange/ExchangeOnline/reference/admin-api-authentication.md\n+++ b/Exchange/ExchangeOnline/reference/admin-api-authentication.md\n@@ -42,13 +42,13 @@ monikers: []\n item_type: Content\n source_path: Exchange/ExchangeOnline/reference/admin-api-authentication.md\n cmProducts:\n-- https://authoring-docs-microsoft.poolparty.biz/devrel/1ae5c491-970a-4062-8301-6336e69f9026\n+- https://authoring-docs-microsoft.poolparty.biz/devrel/fcc3cd4a-59ea-47a2-9cc1-784142a5a25d\n - https://authoring-docs-microsoft.poolparty.biz/devrel/cf9b82c5-b6dc-45f3-b005-b1bc5fc03bea\n-- https://microsoft-devrel.poolparty.biz/DevRelOfferingOntology/1433a524-c01f-4b87-beab-670c040dea4f\n+- https://authoring-docs-microsoft.poolparty.biz/devrel/1ae5c491-970a-4062-8301-6336e69f9026\n spProducts:\n-- https://authoring-docs-microsoft.poolparty.biz/devrel/f2c3e52e-3667-4e8a-bf11-20b9eaccdc8c\n+- https://authoring-docs-microsoft.poolparty.biz/devrel/d7a55faf-a992-4e27-aa3a-eadc9830e778\n - https://authoring-docs-microsoft.poolparty.biz/devrel/0c85d34e-bfd2-4466-957c-f0b61e9692df\n-- https://microsoft-devrel.poolparty.biz/DevRelOfferingOntology/312f1f05-a431-4193-8a4d-e6245d5966de\n+- https://authoring-docs-microsoft.poolparty.biz/devrel/f2c3e52e-3667-4e8a-bf11-20b9eaccdc8c\n platformId: 413abaa8-3950-4789-dc24-0428993e5ae7\n ---\n \n@@ -56,7 +56,7 @@ platformId: 413abaa8-3950-4789-dc24-0428993e5ae7\n \n Note\r\n \r\n-The features described in this article are currently in Preview, aren't available in all organizations, and are subject to change.\r\n+The features described in this article are now generally available.\r\n \r\n This article covers the authentication and authorization requirements for using endpoints for the Exchange Online Admin API.\r\n \r\n@@ -73,6 +73,10 @@ To access the Admin API, your app must establish its identity, obtain the right\n \r\n     - Delegated flow: `Exchange.ManageV2`.\r\n     - App-only flow: `Exchange.ManageAsAppV2`.\r\n+\r\n+    Note\r\n+\r\n+    `Exchange.ManageV2` and `Exchange.ManageAsAppV2` permissions are being retired. Use `Exchange.AdminAPI.Manage` for delegated access and `Exchange.AdminAPI.ManageAsApp` for app-only access. These are dedicated permissions for the Exchange Online Admin API v2.0 to provide a clearer authorization model for applications accessing these endpoints. The Exchange Online Admin API v2.0 endpoints aren't being retired; this change affects only the permissions used to access them.\r\n 3. Step 3: Assign RBAC permissions\r\n \r\n     Exchange Online uses role-based access control (RBAC) to determine which endpoints, cmdlets, and objects the caller can manage. Assign the appropriate RBAC roles to the user (for delegated access) or to the app's service principal (for app-only access).\r\n@@ -128,18 +132,18 @@ You can't create credentials for native applications because they can't be used\n     [![Screenshot of the APIs my organization uses tab on the Request API permission flyout with Office 365 Exchange Online entered in the search box.](../exchangeonline/media/admin-api-06-api-permissions-addition-page.png)](../exchangeonline/media/admin-api-06-api-permissions-addition-page.png#lightbox)\r\n 4. On the **What type of permissions does your application require?** flyout, make one of the following selections:\r\n \r\n-    - App-only flow: Select **Application permissions**, expand **Exchange**, select **Exchange.ManageAsAppV2**, and then select **Add permissions**.\r\n+    - App-only flow: Select **Application permissions**, expand **Exchange**, select **Exchange.AdminAPI.ManageAsApp**, and then select **Add permissions**.\r\n \r\n         [![Screenshot of the What type of permissions does your application require? flyout with the values for app-only flow selected.](../exchangeonline/media/admin-api-07-api-permissions-addition-page-app-only.png)](../exchangeonline/media/admin-api-07-api-permissions-addition-page-app-only.png#lightbox)\r\n-    - Delegated flow: Select **Delegated permissions**, expand **Exchange**, select **Exchange.ManageV2**, and then select **Add permissions**.\r\n+    - Delegated flow: Select **Delegated permissions**, expand **Exchange**, select **Exchange.AdminAPI.Manage**, and then select **Add permissions**.\r\n \r\n         [![Screenshot of the What type of permissions does your application require? flyout with the values for delegated flow selected.](../exchangeonline/media/admin-api-08-api-permissions-addition-page-delegated.png)](../exchangeonline/media/admin-api-08-api-permissions-addition-page-delegated.png#lightbox)\r\n 5. Back on the **API permissions** page, verify the selections from the previous step are listed:\r\n \r\n-    - **Office 365 Exchange Online** &gt; **Exchange.ManageAsApp**:\r\n+    - **Office 365 Exchange Online** &gt; **Exchange.AdminAPI.ManageAsApp**:\r\n         - Type: Application\r\n         - Admin consent required: Yes\r\n-    - **Office 365 Exchange Online** &gt; **Exchange.ManageV2**:\r\n+    - **Office 365 Exchange Online** &gt; **Exchange.AdminAPI.Manage**:\r\n         - Type: Delegated\r\n         - Admin consent required: Yes\r\n 6. Select **Grant admin consent for**, review the confirmation dialog, and select **Yes**.\r\n@@ -300,7 +304,7 @@ A successful response includes the following results:\n \r\n ### Client credentials flow (app-only)\r\n \r\n-Use this flow for service-to-service calls without a user. After admin consent to application permissions (for example, `Exchange.ManageAsAppV2`) and assigning the required RBAC roles, request a token using the app's own credentials. No refresh token is issued. Request new access tokens as needed.\r\n+Use this flow for service-to-service calls without a user. After admin consent to application permissions (for example, `Exchange.AdminAPI.ManageAsApp`) and assigning the required RBAC roles, request a token using the app's own credentials. No refresh token is issued. Request new access tokens as needed.\r\n \r\n To acquire an access token, send a POST request to the `/token` identity platform endpoint. In this request, the client uses the client secret.\r\n \r\n",
+      "baseCommitSha": "850d15f0827bfb53ba8b16863928156a73ed2b46",
+      "commitSha": "7c74c17c85085a08a10ce54b3f78bdfb0ffa5a43",
+      "commitMessage": "Mirror Learn: 2 changed",
+      "commitAuthor": "github-actions[bot]",
+      "commitDate": "2026-11-25 15:03:53 +0000",
+      "githubUrl": "https://github.com/merill/exchange-docs-mirror/blob/main/Exchange/ExchangeOnline/reference/admin-api-authentication.md",
+      "publicDocsUrl": "https://learn.microsoft.com/en-us/exchange/reference/admin-api-authentication",
+      "eventId": "exchange-docs:7c74c17c85085a08a10ce54b3f78bdfb0ffa5a43:modified:Exchange/ExchangeOnline/reference/admin-api-authentication.md",
+      "firstSeenAt": "2026-11-25T23:12:00.752Z",
+      "englishSummary": {
+        "category": "Retirement",
+        "headline": "Admin API permissions are changing",
+        "summary": "The documentation states that Exchange.ManageV2 and Exchange.ManageAsAppV2 are being retired and replaces them with Exchange.AdminAPI.Manage and Exchange.AdminAPI.ManageAsApp. It also says the described features are now generally available.",
+        "adminImpact": "Update delegated and app-only application permissions, consent, and token configuration to use the new permission names.",
+        "actionRequired": true,
+        "generatedBy": "openai",
+        "model": "gpt-5.6-luna"
+      }
+    },
+    {
+      "filename": "Exchange/ExchangeOnline/reference/admin-api-overview.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "patch": "diff --git a/Exchange/ExchangeOnline/reference/admin-api-overview.md b/Exchange/ExchangeOnline/reference/admin-api-overview.md\nindex a325115..3a83667 100644\n--- a/Exchange/ExchangeOnline/reference/admin-api-overview.md\n+++ b/Exchange/ExchangeOnline/reference/admin-api-overview.md\n@@ -56,7 +56,7 @@ platformId: 1c7043d0-461f-1410-762c-8614c61048d1\n \n Note\r\n \r\n-The features described in this article are currently in Preview, aren't available in all organizations, and are subject to change.\r\n+The features described in this article are now generally available to all organizations.\r\n \r\n The Exchange Online Admin API is a REST-based administrative surface that enables a focused set of Exchange cmdlets and parameters as POST-only endpoints. The API enables access to a few key tasks that were previously available through Exchange Web Services (EWS), which is [planned for deprecation in October 2026](../clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online). The API is built for these specific scenarios and *doesn't* replace the full Exchange administration surface in Exchange Online PowerShell.\r\n \r\n",
+      "baseCommitSha": "850d15f0827bfb53ba8b16863928156a73ed2b46",
+      "commitSha": "7c74c17c85085a08a10ce54b3f78bdfb0ffa5a43",
+      "commitMessage": "Mirror Learn: 2 changed",
+      "commitAuthor": "github-actions[bot]",
+      "commitDate": "2026-11-25 15:03:53 +0000",
+      "githubUrl": "https://github.com/merill/exchange-docs-mirror/blob/main/Exchange/ExchangeOnline/reference/admin-api-overview.md",
+      "publicDocsUrl": "https://learn.microsoft.com/en-us/exchange/reference/admin-api-overview",
+      "eventId": "exchange-docs:7c74c17c85085a08a10ce54b3f78bdfb0ffa5a43:modified:Exchange/ExchangeOnline/reference/admin-api-overview.md",
+      "firstSeenAt": "2026-11-25T23:12:00.762Z",
+      "englishSummary": {
+        "category": "Generally available",
+        "headline": "Exchange Admin API features are available to all organizations",
+        "summary": "The documentation states that the features are now generally available to all organizations.",
+        "adminImpact": "Administrators can use the documented features across all organizations; no action is specified.",
+        "actionRequired": false,
+        "generatedBy": "openai",
+        "model": "gpt-5.6-luna"
+      }
+    }
+  ],
+  "deletedFiles": [],
+  "messageCenterItems": [],
+  "summary": {
+    "totalCommits": 1,
+    "totalFiles": 2,
+    "authors": [
+      "github-actions[bot]"
+    ]
+  },
+  "englishSummary": {
+    "overview": "Today's report includes 0 new, 2 updated, and 0 removed Exchange Online documentation files across 1 documentation area.",
+    "groups": [
+      {
+        "category": "Retirement",
+        "title": "Exchange Online",
+        "summary": "The documentation states that Exchange.ManageV2 and Exchange.ManageAsAppV2 are being retired and replaces them with Exchange.AdminAPI.Manage and Exchange.AdminAPI.ManageAsApp. It also says the described features are now generally available. The documentation states that the features are now generally available to all organizations.",
+        "sourceFiles": [
+          "Exchange/ExchangeOnline/reference/admin-api-authentication.md",
+          "Exchange/ExchangeOnline/reference/admin-api-overview.md"
+        ]
+      }
+    ],
+    "highlights": [
+      {
+        "category": "Retirement",
+        "headline": "Exchange Online",
+        "detail": "The documentation states that Exchange.ManageV2 and Exchange.ManageAsAppV2 are being retired and replaces them with Exchange.AdminAPI.Manage and Exchange.AdminAPI.ManageAsApp. It also says the described features are now generally available. The documentation states that the features are now generally available to all organizations."
+      }
+    ],
+    "generatedBy": "fallback"
+  }
+}
